@@ -14,7 +14,7 @@ import UIKit
 @IBDesignable
 open class SkyFloatingLabelTextField: UITextField {
     /// A Boolean value that determines if the language displayed is LTR. Default value set automatically from the application language settings.
-    var isLTRLanguage = UIApplication.shared.userInterfaceLayoutDirection == .leftToRight {
+    open var isLTRLanguage = UIApplication.shared.userInterfaceLayoutDirection == .leftToRight {
         didSet {
            self.updateTextAligment()
         }
@@ -23,8 +23,10 @@ open class SkyFloatingLabelTextField: UITextField {
     fileprivate func updateTextAligment() {
         if(self.isLTRLanguage) {
             self.textAlignment = .left
+            self.titleLabel.textAlignment = .left
         } else {
             self.textAlignment = .right
+            self.titleLabel.textAlignment = .right
         }
     }
 
@@ -369,7 +371,7 @@ open class SkyFloatingLabelTextField: UITextField {
         if self.hasErrorMessage {
             self.titleLabel.textColor = self.errorColor
         } else {
-            if self.editingOrSelected || self.isHighlighted {
+            if self.editingOrSelected { //|| self.isHighlighted {
                 self.titleLabel.textColor = self.selectedTitleColor
             } else {
                 self.titleLabel.textColor = self.titleColor
